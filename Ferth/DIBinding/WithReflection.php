@@ -57,8 +57,12 @@ abstract class WithReflection
             // check whether tags have to be checked
             if ($reflection instanceof \ReflectionMethod && $reflection->isConstructor())
             {
-                $class = new \ReflectionClass($reflection->late_bound_class);
-                $parameters[$position] = $this->container->getObjectConsideringTags($interface->getName(), $class->getInterfaceNames());
+                /*/**
+                 * Note: late_bound_class is not a real reflection feature; we
+                 * set it earlier to get the "real" class; otherwise we will
+                 * get the class in which the method has been implemented.
+                 */
+                $parameters[$position] = $this->container->getObjectConsideringTags($interface->getName(), class_implements($reflection->late_bound_class));
             } else {
                 $parameters[$position] = $this->container->getObject($interface->getName());
             }
