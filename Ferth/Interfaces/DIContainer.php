@@ -26,7 +26,7 @@ namespace Ferth\Interfaces;
  */
 interface DIContainer
 {
-    const __CLASS = __CLASS__;
+    
     /**
      * Binds an interface or class to it's concrete implementation.
      *

@@ -136,6 +136,19 @@ class DIContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * The second parameter of DIContainer::getObject allows dynamic parameter
+     * injection. Testing also for position based setting.
+     */
+    public function testDynamicParameterBinding()
+    {
+         $this->container->bindImplementation('\DITest\iA', '\DITest\WithParameters')
+                 ->save();
+
+         $object = $this->container->getObject('\DITest\iA', array(1 => true));
+         $this->assertEquals($object->value, true);
+    }
+
+    /**
      * @depends testBindInterfaceToClass
      */
     public function testMakeChild()

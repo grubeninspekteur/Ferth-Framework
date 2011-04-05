@@ -1,31 +1,17 @@
 <?php
+
 namespace Ferth;
 
 /**
- * The ConfigObject holds the variables of one configuration group.
+ * Description of ConfigObject
  *
- * Retrieving example:
- * <code>
- * // Assuming that $config is an instance of ConfigLoader
- *
- * // Direct variable access (read + write)
- * $config('main')->$project_name;
- *
- * // Access via Array
- * $config_main = $config('main');
- * $config_main['project_name'];
- * </code>
- *
- * @package Config
+ * @package 
  */
-class ConfigObject extends \ArrayObject implements Interfaces\ConfigObject
+class ConfigObject extends \ArrayObject
 {
-    public function __construct(array $elements = array())
+    public function __construct(array $array)
     {
-        foreach($elements as $key => $value)
-        {
-            $this->$key = $value;
-        }
+        parent::__construct($array, \ArrayObject::ARRAY_AS_PROPS);
     }
 }
 ?>
